@@ -1,11 +1,12 @@
-const db = require('../models/drinkModel');
+// const db = require('../models/drinkModel');
+const User = require('../models/userModel');
 const universeController = {};
 //controller to retrieve all drinks by name in "drinks" table
 universeController.getDrinks = (req, res, next) => {
   const drinksQuery = 'SELECT * FROM drinks';
 
   //query database for all drinks by name in "drinks" table 
-  db.query(drinksQuery)
+  User.query(drinksQuery)
     .then((data) => {
       res.locals.drinks = data.rows;
       return next();
@@ -20,7 +21,7 @@ universeController.getDrinks = (req, res, next) => {
 universeController.getIngredients = (req, res, next) => { 
   const ingredientsQuery = 'SELECT * FROM ingredients';
   //query database for all ingredients (user inventory) in "ingredients"table
-  db.query(ingredientsQuery)
+  User.query(ingredientsQuery)
     .then((data) => {
       res.locals.ingredients = data.rows;
       return next();

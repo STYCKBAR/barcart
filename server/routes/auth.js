@@ -8,23 +8,22 @@ const sessionController = require('../controllers/sessionController');
 const cookieController = require('../controllers/cookieController');
 
 // Sign Up - user can post username and password on the login page and hit create and send a post request to our server. 
+
+// sessionController.startSession - put back in if we need this
 router.post('/signup', userController.createUser,
   cookieController.setSSIDCookie,
-  sessionController.startSession, (req, res) => {
+ (req, res) => {
     // WHAT DO WE WANT TO DO HERE?
   }
 );
 
 // Login
+// sessionController.startSession - put back in if we need this
 router.post('/login',
   userController.verifyUser,
   cookieController.setSSIDCookie,
-  sessionController.startSession,
   (req, res) => {
-    { verifed: true }
-    // req.body.username = 'shelbylovespuppies'
-    // req.body.password = password
-  // WHAT DO WE WANT TO DO HERE?
+    res.status(200).json(res.locals.response)
   }
 );
 
