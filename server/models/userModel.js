@@ -3,7 +3,7 @@ const { Pool } = require('pg');
 const SALT_WORK_FACTOR = 10;
 const bcrypt = require('bcryptjs');
 const PG_URI =
-    'postgres://oouggoym:xXJyrGgtLfuVeuaTpqfasnLppA8ViTvV@chunee.db.elephantsql.com/oouggoym';
+    'postgres://dvtvjbev:ANujL7hkM_DH06AFKRPVPbBW2c5jJcog@lallah.db.elephantsql.com/dvtvjbev';
 
 // create a new pool here using the connection string above
 const pool = new Pool({

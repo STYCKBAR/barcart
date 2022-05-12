@@ -28,6 +28,11 @@ module.exports = {
         },
       },
       {
+        test: /\.js$/,
+        enforce: "pre",
+        use: ["source-map-loader"],
+      },
+      {
         test: /\.s(c|a)ss$/,
         exclude: /node_modules/,
         use: ["style-loader", "css-loader", "sass-loader"],
@@ -47,13 +52,22 @@ module.exports = {
   },
   devServer: {
     static: {
-      publicPath: '/build',
-      directory: path.join(__dirname, 'build'),
+      publicPath: "/build",
+      directory: path.join(__dirname, "build"),
     },
     port: 8080,
     proxy: {
-      '*': { target: 'http://localhost:3000' },
-      changeOrigin: true
+      "*": { target: "http://localhost:3000" },
+      changeOrigin: true,
     },
   },
+  // module: {
+    // rules: [
+    //   {
+    //     test: /\.js$/,
+    //     enforce: "pre",
+    //     use: ["source-map-loader"],
+    //   },
+    // ],
+  // },
 };
