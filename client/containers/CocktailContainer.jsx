@@ -12,9 +12,10 @@ export default function CocktailContainer() {
   const [cocktailList, setCocktailList] = useState([]);//cocktailList [{id: 1, recipe_name: margarita, description:xxx, directions:xxxx}, {id: 2, recipe_name: Martini, description:xxx, directions:xxx}]
   useEffect(() => {
     const getCocktailData = async () => {
-      const request = await fetch("api/universe/drinks"); //get request to backend and get all receipies from receipt table
+      const request = await fetch("/universe/drinks"); //get request to backend and get all receipies from receipt table
       const data = await request.json();
-      setCocktailList([...data.recipies]);
+      console.log('data', data)
+      setCocktailList([...data]);
     };
     getCocktailData().catch(console.error);
   }, []);

@@ -16,21 +16,6 @@ module.exports = {
       template: "index.html",
     }),
   ],
-  devServer: {
-    static: {
-      directory: "index.html",
-    },
-    port: 8080,
-    open: true,
-    hot: true,
-    compress: true,
-    historyApiFallback: true,
-    proxy: {
-      "/api/**": {
-        target: "http://localhost:3000/",
-      },
-    },
-  },
   module: {
     rules: [
       {
@@ -59,5 +44,16 @@ module.exports = {
         ],
       },
     ],
+  },
+  devServer: {
+    static: {
+      publicPath: '/build',
+      directory: path.join(__dirname, 'build'),
+    },
+    port: 8080,
+    proxy: {
+      '*': { target: 'http://localhost:3000' },
+      changeOrigin: true
+    },
   },
 };

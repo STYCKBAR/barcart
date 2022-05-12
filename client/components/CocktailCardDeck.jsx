@@ -14,7 +14,7 @@ export default function CocktailCardDeck(props) {
         <>loading...</>
       ) : (
         props.cocktailList.map((ele, i) => {
-          return <CocktailCard key={i} cocktail={ele} />;
+          return <CocktailCard key={i} cocktail={ele} />; //ele: {id: 1, recipe_name: margarita, description:xxx, directions:xxxx}
         })
       )}
     </div>

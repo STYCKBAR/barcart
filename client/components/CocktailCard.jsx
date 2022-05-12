@@ -31,7 +31,9 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function CocktailCard() {
+export default function CocktailCard(props) {
+  //we get props.cocktail and props.key from CocktailCardDeck
+  // props.cocktail looks like {id: 1, recipe_name: margarita, description:xxx, directions:xxxx}
   const [expanded, setExpanded] = React.useState(false);
   //get request to backend get description, recipe_name from recipes table
 
@@ -52,8 +54,8 @@ export default function CocktailCard() {
             <MoreVertIcon />
           </IconButton>
         }
-        //we want to get the drink name from database
-        title="Margarita"
+
+        title={props.cocktail.recipe_name}
       />
       <CardContent id="cardContainer">
 
@@ -66,9 +68,8 @@ export default function CocktailCard() {
         <CardContent>
           <Typography variant="body2" color="text.secondary">
             {/* get the drink description from db */}
-            This impressive paella is a perfect party dish and a fun meal to cook
-            together with your guests. Add 1 cup of frozen peas along with the mussels,
-            if you like.
+            {props.cocktail.description}
+
           </Typography>
         </CardContent>
 
@@ -100,35 +101,13 @@ export default function CocktailCard() {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            <IngredientList />
+            <IngredientList cocktail={props.cocktail} />
           </Typography>
 
 
-          <Typography paragraph>Method:</Typography>
+          <Typography paragraph>Directions:</Typography>
           <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
-            aside for 10 minutes.
-          </Typography>
-          <Typography paragraph>
-            {/* get direction from db */}
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over
-            medium-high heat. Add chicken, shrimp and chorizo, and cook, stirring
-            occasionally until lightly browned, 6 to 8 minutes. Transfer shrimp to a
-            large plate and set aside, leaving chicken and chorizo in the pan. Add
-            pimentón, bay leaves, garlic, tomatoes, onion, salt and pepper, and cook,
-            stirring often until thickened and fragrant, about 10 minutes. Add
-            saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-          </Typography>
-          <Typography paragraph>
-            Add rice and stir very gently to distribute. Top with artichokes and
-            peppers, and cook without stirring, until most of the liquid is absorbed,
-            15 to 18 minutes. Reduce heat to medium-low, add reserved shrimp and
-            mussels, tucking them down into the rice, and cook again without
-            stirring, until mussels have opened and rice is just tender, 5 to 7
-            minutes more. (Discard any mussels that don&apos;t open.)
-          </Typography>
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then serve.
+            {props.cocktail.directions}
           </Typography>
         </CardContent>
       </Collapse>

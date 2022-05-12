@@ -11,23 +11,23 @@ import UserBarCardDeck from "../components/UserBarCardDeck.jsx";
  *
  * IMPORTANT: All bottles are stored at a rounded oz amount to 25oz to make ml/oz conversion simpler
  */
-export default function UserBarContainer() {
-  // Create state
-  const [userBar, setUserBar] = useState();
-  // useEffect
-  useEffect(() => {
-    const getUserBarData = async () => {
-      const request = await fetch("api/universe/ingredients");
-      const ingredients = await request.json();
-      console.log(ingredients);
-      setUserBar([...ingredients.ingredients]);
-    };
-    getUserBarData().catch(console.error);
-  }, []);
+// export default function UserBarContainer() {
+//   // Create state
+//   const [userBar, setUserBar] = useState();
+//   // useEffect
+//   useEffect(() => {
+//     const getUserBarData = async () => {
+//       const request = await fetch("/universe/ingredients");
+//       const ingredients = await request.json();
+//       console.log(ingredients);
+//       setUserBar([...ingredients.ingredients]);
+//     };
+//     getUserBarData().catch(console.error);
+//   }, []);
 
-  return (
-    <div className="ingredient-container">
-      <UserBarCardDeck userBar={userBar} />
-    </div>
-  );
-}
+//   return (
+//     <div className="ingredient-container">
+//       <UserBarCardDeck userBar={userBar} />
+//     </div>
+//   );
+// }
