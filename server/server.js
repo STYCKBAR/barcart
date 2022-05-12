@@ -22,7 +22,6 @@ app.use('/drinks', drinksRouter);
 app.use('/auth', authRouter);
 
 
-
 // serve static files
 app.use(express.static(path.resolve(__dirname)));
 
