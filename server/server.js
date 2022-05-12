@@ -3,13 +3,24 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const PORT = 3000;
+const cookieParser = require('cookie-parser');
 
+// import routers
 const universeRouter = require('./routes/universe');
 const drinksRouter = require('./routes/drinks');
+const authRouter = require('./routes/auth')
+
+// Parse Cookies into req.cookies object
+app.use(cookieParser());
 
 app.use(express.json());
-app.use('/api/universe', universeRouter);
-app.use('/api/drinks', drinksRouter);
+// link to universe router
+app.use('/universe', universeRouter);
+// link to drinks router
+app.use('/drinks', drinksRouter);
+// link to authentication router
+app.use('/auth', authRouter);
+
 
 // serve static files
 app.use(express.static(path.resolve(__dirname)));
@@ -27,6 +38,17 @@ app.get('/favicon.ico', (req, res) => (
 
 app.get('/', (req, res) => {
   return res.sendFile(path.resolve(__dirname, '../index.html'));
+});
+
+// 404 Handler
+app.use('*', (req, res) => {
+  res.status(404).send('Not Found');
+});
+
+// Global Error Handler
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).send({ error: err });
 });
 
 app.listen(PORT, () => {

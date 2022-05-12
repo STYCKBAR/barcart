@@ -1,5 +1,5 @@
 {
-  "name": "Barcart",
+  "name": "barcart",
   "version": "6.6.6",
   "description": "",
   "main": "webpack.config.js",
@@ -34,6 +34,7 @@
     "babel-loader": "^8.2.5",
     "babel-preset-react-optimize": "^1.0.1",
     "concurrently": "^7.1.0",
+    "cookie-parser": "^1.4.6",
     "css-loader": "^6.7.1",
     "express": "^4.18.1",
     "html-webpack-plugin": "^5.5.0",
