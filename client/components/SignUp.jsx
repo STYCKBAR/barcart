@@ -46,8 +46,10 @@ export default function SignUp() {
   //state: username, password, confirmedPassword, isPasswordMatch
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
+  const [userid, setUserId] = useState();
   const [isPasswordMatch, setIsPasswordMatch] = useState();
   const [clicked, setClicked] = useState();
+  let navigate = useNavigate();
 
   //when user click button, we get the username, password from the form and make a post request to backend
   const handleSubmit = (event) => {
@@ -64,13 +66,11 @@ export default function SignUp() {
     console.log("data.get(password)", data.get("password"));
     setIsPasswordMatch(data.get("password") === data.get("confirmPassword"));
 
-
-
-
   }
   const goToMainPage = () => {
     //go to main page
-    navigate("/cocktails");
+    // Navigate("/cocktails", { state: { userid: userid } });
+    navigate("/cocktails", { state: { userid: 'fake123' } });
   };
 
   useEffect(() => {
@@ -94,7 +94,7 @@ export default function SignUp() {
         //   .then((data) => data.json())
         //   .then((data) => {
         //     //data here is the response
-        //     //set state of verified
+        //     setUserId(data.userid)
 
         //   })
         //   .catch((err) => console.log("signup: ERROR: ", err));
