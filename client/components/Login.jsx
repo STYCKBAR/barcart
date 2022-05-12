@@ -46,7 +46,8 @@ const theme = createTheme();
 export default function SignIn() {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
-  const [verified, setVerified] = useState(true);
+  const [userid, setUserId] = useState();
+  const [verified, setVerified] = useState(false);
   const navigate = useNavigate();
   const [clicked, setClicked] = useState();
 
@@ -80,10 +81,12 @@ export default function SignIn() {
     //     //data here is the response
     //     //set state of verified
     //     setVerified(data.verified);
+    //     setUserId(data.userid);
     //   })
     //   .catch((err) => console.log("Loginpage: ERROR: ", err));
-    // setVerified(true);
-    setVerified(false);
+    setVerified(true);
+    setUserId("fake456");
+
   };
   //this is handle click when we click 'Don't have an account? Sign Up'
   const handleClick = (event) => {
@@ -91,12 +94,6 @@ export default function SignIn() {
     console.log("go to sign up page");
   };
 
-  const goToMainpage = () =>
-    navigate("/cocktails", { state: { verified, username, password } });
-
-  const goToSignUpPage = () => {
-    navigate("/signup");
-  }
 
   //when the verified state changes, we trigger the useEffect and do somthing based on the verified value
   useEffect(() => {
@@ -112,6 +109,13 @@ export default function SignIn() {
       }
     }
   }, [verified]);
+
+  const goToMainpage = () =>
+    navigate("/cocktails", { state: { userid: userid } });
+
+  const goToSignUpPage = () => {
+    navigate("/signup");
+  }
 
   return (
     <ThemeProvider theme={theme}>

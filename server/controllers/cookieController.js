@@ -15,7 +15,7 @@ cookieController.setSSIDCookie = async (req, res, next) => {
     console.log('ssid', dbUserID.rows[0].user_id) //ssid1
     // set the cookie on the response object
     res.cookie("ssid", dbUserID.rows[0].user_id, { httpOnly: true });
-    
+
     await User.query(
       `INSERT INTO sessions(cookie_id, user_id, created_at) VALUES('ssid' + ${dbUserID.rows[0].user_id}', ${dbUserID.rows[0].user_id}, now()`);
     next();
@@ -26,7 +26,7 @@ cookieController.setSSIDCookie = async (req, res, next) => {
     });
   }
 }
-  // then add to our database thru a database query
+// then add to our database thru a database query
 //   catch (err) {
 //     console.log(err);
 //     return next({

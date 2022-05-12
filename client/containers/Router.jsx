@@ -21,7 +21,7 @@ export default function Router() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/listPlaceholder" element={<ShoppingListContainer />} />
           <Route path="/cocktails" element={<CocktailContainer />} />
-
+          <Route path="/userbar" element={<UserBarContainer />} />
         </Routes>
       </BrowserRouter>
     </div>

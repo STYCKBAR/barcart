@@ -32,10 +32,11 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function CocktailCard(props) {
-  //we get props.cocktail and props.key from CocktailCardDeck
+  //we get props.cocktail and props.key, props.userid from CocktailCardDeck
   // props.cocktail looks like {id: 1, recipe_name: margarita, description:xxx, directions:xxxx}
   const [expanded, setExpanded] = React.useState(false);
   //get request to backend get description, recipe_name from recipes table
+  console.log("props.userid in CocktailCard: ", props.userid);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -101,7 +102,7 @@ export default function CocktailCard(props) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            <IngredientList cocktail={props.cocktail} />
+            <IngredientList cocktail={props.cocktail} userid={props.userid} />
           </Typography>
 
 
