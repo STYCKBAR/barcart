@@ -4,10 +4,10 @@ const User = require('../models/userModel');
 const drinksController = {};
 
 drinksController.getDrinks = async (req, res, next) => {
-
   try {
     const dbRecipes = await User.query(`SELECT * FROM recipes`);
-    res.locals.recipes = dbRecipes;
+    console.log(dbRecipes.rows); // req.query
+    res.locals.recipes = dbRecipes.rows;
   } catch (err) {
     console.log(err);
     return next({
