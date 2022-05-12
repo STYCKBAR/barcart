@@ -5,6 +5,7 @@ import ShoppingListContainer from "./ShoppingListContainer.jsx";
 import CocktailContainer from "./CocktailContainer.jsx";
 import UserBarContainer from "./UserBarContainer.jsx";
 import SignIn from "../components/Login.jsx";
+import SignUp from "../components/SignUp.jsx";
 
 /**
  * Renders the navbar which has links to all Routes below.

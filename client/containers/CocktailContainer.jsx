@@ -9,12 +9,12 @@ import CocktailCardDeck from "../components/CocktailCardDeck.jsx";
  * 2. List of possible cocktails based on user's bar inventory
  */
 export default function CocktailContainer() {
-  const [cocktailList, setCocktailList] = useState([]);
+  const [cocktailList, setCocktailList] = useState([]);//cocktailList [{id: 1, recipe_name: margarita, description:xxx, directions:xxxx}, {id: 2, recipe_name: Martini, description:xxx, directions:xxx}]
   useEffect(() => {
     const getCocktailData = async () => {
-      const request = await fetch("api/universe/drinks");
-      const drinks = await request.json();
-      setCocktailList([...drinks.drinks]);
+      const request = await fetch("api/universe/drinks"); //get request to backend and get all receipies from receipt table
+      const data = await request.json();
+      setCocktailList([...data.recipies]);
     };
     getCocktailData().catch(console.error);
   }, []);
