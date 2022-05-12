@@ -43,7 +43,77 @@ const theme = createTheme();
 
 
 export default function SignUp() {
- 
+  //state: username, password, confirmedPassword, isPasswordMatch
+  const [username, setUserName] = useState();
+  const [password, setPassword] = useState();
+  const [isPasswordMatch, setIsPasswordMatch] = useState();
+  const [clicked, setClicked] = useState();
+
+  //when user click button, we get the username, password from the form and make a post request to backend
+  const handleSubmit = (event) => {
+
+    event.preventDefault();
+    setClicked(true);
+    console.log("event currentTarget", event.currentTarget);
+    //get data (username, password) from the form
+    const data = new FormData(event.currentTarget);
+    console.log("data: ", data)
+    //reset the state of username and password, IsPasswordMatch
+    setUserName(data.get("username"));
+    setPassword(data.get("password"));
+    console.log("data.get(password)", data.get("password"));
+    setIsPasswordMatch(data.get("password") === data.get("confirmPassword"));
+
+
+
+
+  }
+  const goToMainPage = () => {
+    //go to main page
+    navigate("/cocktails");
+  };
+
+  useEffect(() => {
+    //we only call post request and go to main page, when the password is not empty and two passwords are the same
+    console.log("password is: ", password);
+    console.log("passwordmatch: ", isPasswordMatch);
+    if (clicked) {
+      if (password && isPasswordMatch) {
+
+        //post to backend, get response
+        // fetch("auth/signup", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({
+        //     username,
+        //     password,
+        //   }),
+        // })
+        //   .then((data) => data.json())
+        //   .then((data) => {
+        //     //data here is the response
+        //     //set state of verified
+
+        //   })
+        //   .catch((err) => console.log("signup: ERROR: ", err));
+
+        //go to main page
+        goToMainPage();
+        console.log("went to main page after signing up")
+      }
+      else {
+        document.getElementById('password').style.color = 'red';
+        document.getElementById('confirmPassword').style.color = 'red';
+      }
+
+    }
+
+  }, [isPasswordMatch])
+
+
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -87,13 +157,21 @@ export default function SignUp() {
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="confirmPassword"
+              label="Confirm Password"
+              type="password"
+              id="confirmPassword"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-          
+
             <Button
               type="submit"
               fullWidth

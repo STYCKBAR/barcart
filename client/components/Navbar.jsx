@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Router } from "react-router-dom";
 import styles from "../scss/navbar.scss";
+import LocalBarIcon from '@mui/icons-material/LocalBar';
 
 
 /**
@@ -10,7 +11,7 @@ export default function Navbar() {
   return (
     <div className="navbar navbar-container">
       <Link to="/" className="app-title">
-        Barcart
+        <LocalBarIcon /> Barcart
       </Link>
       <ul className="nav-menu">
         <li className="nav-item">

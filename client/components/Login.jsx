@@ -59,9 +59,6 @@ export default function SignIn() {
     console.log("event currentTarget", event.currentTarget);
     //get data (username, password) from the form
     const data = new FormData(event.currentTarget);
-    console.log("data:", data);
-    console.log("username", data.get("username"));
-    console.log("password", data.get("password"));
     //reset the state of username and password
     setClicked(true);
     setUserName(data.get("username"));
@@ -90,34 +87,30 @@ export default function SignIn() {
   };
   //this is handle click when we click 'Don't have an account? Sign Up'
   const handleClick = (event) => {
-
-
-
+    goToSignUpPage();
+    console.log("go to sign up page");
   };
+
+  const goToMainpage = () =>
+    navigate("/cocktails", { state: { verified, username, password } });
+
+  const goToSignUpPage = () => {
+    navigate("/signup");
+  }
+
   //when the verified state changes, we trigger the useEffect and do somthing based on the verified value
   useEffect(() => {
-    const goToMainpage = () =>
-      navigate("/cocktails", { state: { verified, username, password } });
     if (clicked) {
       if (!verified) {
         //if verified is false, change title to sign up
-        document.getElementById("loginTitle").innerText = "Sign Up";
-        document.getElementById("logInButton").innerText = "Sign Up";
-        console.log("we should see sign up here");
+        goToSignUpPage();
+        console.log("go to sign up page");
       } else {
         //if verified is true, bring user to main page
         goToMainpage();
         console.log("go to main page");
       }
     }
-    // declare navigate so we can use it as a hook in useEffect
-    // const navigate = useNavigate();
-    // useEffect(() => {
-    //   const goToMainPage = () =>
-    //   const goToError = () => navigate(('/error'));
-    //   if (verified === true){ goToMainPage()}
-    //   if (verified === false){ goToError()}
-    // }, [verified]);
   }, [verified]);
 
   return (
