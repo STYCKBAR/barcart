@@ -31,12 +31,12 @@ userController.verifyUser = async (req, res, next) => {
   if (!username || !password) {
     res.redirect('/signup');
     return next('Missing username or password in userController.verifyUser');
-  }
-  // database query to see if username exists in our users db table
-  try {
-    //dbPassword is what is pulled out of our users table hashed_password. It checks to see if username is valid then it kicks back the hashed password.
-    const dbPassword = await User.query('SELECT hashed_password FROM users WHERE username = $1, [username]');
-  } catch (err) {
+	}
+	// database query to see if username exists in our users db table
+	try {
+		//dbPassword is what is pulled out of our users table hashed_password. It checks to see if username is valid then it kicks back the hashed password.
+		const dbPassword = await User.query(`SELECT hashed_password FROM users WHERE username = $1, [${username}]`);
+	} catch (err) {
     console.log(err);
     return next({
       log: 'An error occured in the CONTROLLER - Verify User Query',

@@ -2,7 +2,7 @@
 // const User = require('../models/userModel');
 // const Session = require('../models/sessionModel');
 // const mongoose = require('mongoose');
-
+const User = require('../models/userModel');
 const sessionController = {};
 
 // LoggedIn - find the appropriate session for this request in the database, then
