@@ -35,7 +35,7 @@ userController.verifyUser = async (req, res, next) => {
 	// database query to see if username exists in our users db table
 	try {
 		//dbPassword is what is pulled out of our users table hashed_password. It checks to see if username is valid then it kicks back the hashed password.
-		const dbPassword = await User.query('SELECT hashed_password FROM users WHERE username = $1, [username]');
+		const dbPassword = await User.query(`SELECT hashed_password FROM users WHERE username = $1, [${username}]`);
 	} catch (err) {
     console.log(err);
     return next({

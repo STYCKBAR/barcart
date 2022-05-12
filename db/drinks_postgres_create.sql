@@ -65,6 +65,8 @@ INSERT INTO ingredients (id, ingredient_name) VALUES (37, 'coffee liqueur');
 INSERT INTO ingredients (id, ingredient_name) VALUES (38, 'white rum');
 INSERT INTO ingredients (id, ingredient_name) VALUES (39, 'simple syrup');
 
+INSERT INTO sessions (cookie_id, user_id, created_at) VALUES ()
+
 
 INSERT INTO recipes (recipe_id, recipe_name, description, directions) VALUES (1, 'Bloody Mary', 'The Bloody Mary is a cocktail consisting of a base of tomato juice and vodka. It is then seasoned with savory, usually a hot spicey ingredient, and lemon juice', 'Pour some celery salt onto a small plate. Rub the juicy side of the lemon or lime wedge along the lip of a pint glass. Roll the outer edge of the glass in celery salt until fully coated, then fill the glass with ice and set aside. Squeeze the lemon and lime wedges into a shaker and drop them in. Add the vodka, tomato juice, horseradish, Tabasco, Worcestershire, black pepper, paprika, plus a pinch of celery salt along with ice and shake gently. Strain into the prepared glass. Garnish with parsley sprig, 2 speared green olives, a lime wedge and a celery stalk (optional)');
 INSERT INTO recipes (recipe_id, recipe_name, description, directions) VALUES (2, 'Martini', 'The martini is a cocktail made with gin and vermouth, and garnished with an olive or a lemon twist. Over the years, the martini has become one of the best-known mixed alcoholic beverages.', 'Straight: Pour all ingredients into mixing glass with ice cubes. Stir well. Strain in chilled martini cocktail glass. Squeeze oil from lemon peel onto the drink, or garnish with olive.');
