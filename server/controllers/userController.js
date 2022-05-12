@@ -12,24 +12,24 @@ const saltRounds = 10;
 // createUser (creating account)
 userController.createUser = (req, res, next) => {
   //write code here
-	userController.createUser({
-		username: req.body.username,
-		password: data
-	}, function(error, user) {
-		if(error) {
-			// res.render('./../client/signup', {error: 'hello!'});
-			{}
-		}
-	})
+  userController.createUser({
+    username: req.body.username,
+    password: data
+  }, function (error, user) {
+    if (error) {
+      // res.render('./../client/signup', {error: 'hello!'});
+      { }
+    }
+  })
 
 };
 
-const { username, password } = req.body;
+//const { username, password } = req.body;
 //  verifyUser (login attempt)
 userController.verifyUser = async (req, res, next) => {
-	// if we don't have the info we need, error
-	if (!username || !password) {
-	res.redirect('/signup');
+  // if we don't have the info we need, error
+  if (!username || !password) {
+    res.redirect('/signup');
     return next('Missing username or password in userController.verifyUser');
 	}
 	// database query to see if username exists in our users db table
@@ -42,23 +42,23 @@ userController.verifyUser = async (req, res, next) => {
       log: 'An error occured in the CONTROLLER - Verify User Query',
     });
   }
-      bcrypt
-        .compare(password, dbPassword)
-        .then((result) => {
-          if (!result) {
-			// make sure the front end has a route called /signup (or that it matches)
-            res.redirect('/signup');
-          } else {
-            res.locals.verified = result;
-            return next();
-          }
-        })
-        .catch((err) => {
-          return next(
-            'error in userController.verifyUser: ' + JSON.stringify(err)
-          );
-        });
-    }
+  bcrypt
+    .compare(password, dbPassword)
+    .then((result) => {
+      if (!result) {
+        // make sure the front end has a route called /signup (or that it matches)
+        res.redirect('/signup');
+      } else {
+        res.locals.verified = result;
+        return next();
+      }
+    })
+    .catch((err) => {
+      return next(
+        'error in userController.verifyUser: ' + JSON.stringify(err)
+      );
+    });
+}
 
 
 module.exports = userController;

@@ -55,10 +55,27 @@ import * as React from 'react';
 //     </List>
 //   );
 // }
-export default function IngredientList() {
+export default function IngredientList(props) {
+  // props.cocktail looks like {id: 1, recipe_name: margarita, description:xxx, directions:xxxx}
   //state:
-
   //post request (request body is receipe (e.g. margarita), response is in)
+  useEffect(() => {
+    const getIngredientData = async () => {
+      const request = await fetch("/xxxxx/xxx", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        //body: JSON.stringify({ recipe_id: props.cocktail.id, user_id?}),
+      }
+      ); //get request to backend and get all receipies from receipt table
+      const data = await request.json();
+      console.log('data', data);
+
+    };
+    getIngredientData().catch(console.error);
+  }, []);
+
 
   return (
     <table>
