@@ -29,6 +29,7 @@ const { username, password } = req.body;
 userController.verifyUser = async (req, res, next) => {
 	// if we don't have the info we need, error
 	if (!username || !password) {
+	res.redirect('/signup');
     return next('Missing username or password in userController.verifyUser');
 	}
 	// database query to see if username exists in our users db table
