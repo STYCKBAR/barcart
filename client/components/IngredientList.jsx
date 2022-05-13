@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import IconButton from '@mui/material/IconButton';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import CheckIcon from '@mui/icons-material/Check';
+import Alert from '@mui/material/Alert';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+
+
 
 export default function IngredientList(props) {
   // props.cocktail looks like {id: 1, recipe_name: margarita, description:xxx, directions:xxxx}
@@ -7,6 +14,10 @@ export default function IngredientList(props) {
   const [allIngArr, setAllIngArr] = useState();
   const [avaIngArr, setAvaIngArr] = useState();
   const [isFetched, setIsFetched] = useState(false);
+
+  const handleClick = (event) => {
+    console.log('CLICKED!!!')
+  }
 
   //post request (request body is receipe (e.g. margarita), response is in)
   useEffect(() => {
@@ -31,22 +42,11 @@ export default function IngredientList(props) {
     setIsFetched(true);
   }, []);
 
-  // return (
-  //   <table>
-  //     <tr>
-  //       {columns.map(ele => <th>{ele}</th>)}
-  //     </tr>
-  //   </table>
-  // );
-  // let arr = allIngArr.forEach((el, i) => {
-  //   return allIngArr[i]
-  // })
-
   //render here:
   //if data is not fetched from backend, we only render the table header
   if (!isFetched) {
     return (
-      <table>
+      <table STYLE='padding:0px 20px 0px 0px'>
         <tr>
           <th>Ingredient</th>
           <th>Status</th>
@@ -63,22 +63,29 @@ export default function IngredientList(props) {
   for (let ele of allIngArr) {
     const obj = {};
     if (avaIngArr.includes(ele)) {
-      obj[ele] = 'Checked';
+      obj[ele] = <td><span className="material-symbols-outlined">done</span></td>
     }
     else {
-      obj[ele] = 'Add to Cart'
+      obj[ele] = <td>
+
+
+        <IconButton color="primary" aria-label="add to shopping cart" onClick={() => alert("Added to Cart")}>
+          <AddShoppingCartIcon />
+        </IconButton>
+
+      </td>
     }
     ingList.push(obj);
   }
   console.log(ingList);
+
   return (
-    <table>
+    <table style={{ padding: '0px 20px 0px 0px' }}>
       <tr>
         <th>Ingredient</th>
         <th>Status</th>
       </tr>
-      {ingList.map((ele) => <tr><td>{Object.keys(ele)[0]}</td><td>{Object.values(ele)[0]}</td></tr>)}
-
+      {ingList.map((ele) => <tr><td>{Object.keys(ele)[0]}</td>{Object.values(ele)}</tr>)}
     </table>
 
   )

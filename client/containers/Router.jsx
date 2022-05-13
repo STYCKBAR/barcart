@@ -18,6 +18,7 @@ export default function Router() {
         <Navbar />
         <Routes>
           <Route path="/" element={<SignIn />} />
+
           <Route path="/signup" element={<SignUp />} />
           <Route path="/listPlaceholder" element={<ShoppingListContainer />} />
           <Route path="/cocktails" element={<CocktailContainer />} />

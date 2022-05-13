@@ -14,25 +14,24 @@ export default function CocktailContainer() {
   const location = useLocation();
   useEffect(() => {
 
-    // const getCocktailData = async () => {
-    //   const request = await fetch("/drinks"); //get request to backend and get all receipies from receipt table
-    //   const data = await request.json();
-    //   console.log('data', data)
-    //   setCocktailList([...data]);
-    // };
-    // getCocktailData().catch(console.error);
-    //string
-    const fakeRecipeData = [
-      { id: 1, recipe_name: "margarita1", description: "good1", directions: "shake1" },
-      { id: 2, recipe_name: "margarita2", description: "good2", directions: "shake2" },
-      { id: 3, recipe_name: "longisland", description: "good3", directions: "shake3" },
-    ]
-    setCocktailList(fakeRecipeData)
+    const getCocktailData = async () => {
+      const request = await fetch("/drinks"); //get request to backend and get all receipies from receipt table
+      const data = await request.json()
+        .then(data => {
+          console.log('data thened', data)
+          setCocktailList([...data]);
+        })
+      //console.log('data', data)
+
+    };
+    getCocktailData().catch(console.error);
+
   }, []);
 
   return (
     <div className="cocktail-container">
-      <CocktailCardDeck cocktailList={cocktailList} userid={location.state.userid} />
+      <CocktailCardDeck cocktailList={cocktailList} userid={localStorage.getItem("userid")} />
     </div>
   );
+
 }

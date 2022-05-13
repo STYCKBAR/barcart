@@ -2,25 +2,39 @@
 const User = require('../models/userModel');
 
 const drinksController = {};
+//fixed!!
+drinksController.getDrinks = (req, res, next) => {
+  const drinksQuery = `SELECT * FROM recipes`;
 
-drinksController.getDrinks = async (req, res, next) => {
-  try {
-    const dbRecipes = await User.query(`SELECT * FROM recipes`);
-    console.log(dbRecipes.rows); // req.query
-    res.locals.recipes = dbRecipes.rows;
-  } catch (err) {
-    console.log(err);
-    return next({
+  User.query(drinksQuery)
+    .then((data) => {
+      res.locals.recipes = data.rows;
+      return next();
+    })
+    .catch(error => next({
       log: 'An error occured in the DRINKS CONTROLLER - get all recipes query',
-    });
-  }
+      message: { err: 'An error occured in the DRINKS CONTROLLER - get all recipes query' }
+    }));
 };
 
-    // query the database for the ingredients_in_drinks table with columns added for "ingredient" name, "in_stock" amount and for "drink" name
-  // User.query(queryStr)
-  // .then((data) => {
-    
-    // data.rows is an array of objects; each object corresponds to a single drink/ingredient combo and includes the amount necessary to make the drink AND how much of that ingredient the user has in their inventory
+// drinksController.getDrinks = async (req, res, next) => {
+//   try {
+//     const dbRecipes = await User.query(`SELECT * FROM recipes`);
+//     //console.log(dbRecipes.rows); // req.query
+//     res.locals.recipes = dbRecipes.rows;
+//   } catch (err) {
+//     console.log(err);
+//     return next({
+//       log: 'An error occured in the DRINKS CONTROLLER - get all recipes query',
+//     });
+//   }
+// };
+
+// query the database for the ingredients_in_drinks table with columns added for "ingredient" name, "in_stock" amount and for "drink" name
+// User.query(queryStr)
+// .then((data) => {
+
+// data.rows is an array of objects; each object corresponds to a single drink/ingredient combo and includes the amount necessary to make the drink AND how much of that ingredient the user has in their inventory
 //     let results = data.rows;
 //     let possible = {};
 
@@ -29,7 +43,7 @@ drinksController.getDrinks = async (req, res, next) => {
 //       // calculate how many drinks the user can make given their inventory of the current ingredient
 //       let numDrinks = Math.floor(el.in_stock / el.quantity);
 //       let drinkName = el.drink;
-      
+
 //       // if drink already exists, update numDrinks only if current ingredient it is the "limiting factor"
 //       if (possible.hasOwnProperty(drinkName)) { 
 //         if (numDrinks < possible[drinkName]) {
