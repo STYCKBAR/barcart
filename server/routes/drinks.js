@@ -8,4 +8,7 @@ const drinksController = require('../controllers/drinksController');
 router.get('/', drinksController.getDrinks, (req, res) => res.status(200).json(res.locals.recipes));
 
 
+
+
+
 module.exports = router;

@@ -16,6 +16,43 @@ drinksController.getDrinks = async (req, res, next) => {
   }
 };
 
+
+
+drinksController.getIng = async (req, res, next) => {
+  const { drink, userID } = req.body;
+  console.log(drink)
+  try {
+// text: 'SELECT * FROM planets where _id=' + req.query.id + ';',
+    const recIngQuery = {
+      text: `SELECT i.ingredient_name FROM recipe_ing r INNER JOIN recipes rc on r.recipe_id = rc.recipe_id INNER JOIN ingredients i on r.ing_id = i.id WHERE rc.recipe_name = '${drink}' `
+  };
+    // first we need to find the recipe that the user wants to make in our databse. 
+    const recipeIngResult = await User.query(recIngQuery);
+    console.log(recipeIngResult.rows)
+    res.locals.recipeIng = recipeIngResult.rows;
+    // then we need to search the db for all the ingredients that the user will need, tack that onto the res.locals for the front end
+    // const dbRecipesResult = await User.query(`SELECT ing_id FROM recipe_ing WHERE recipe_id = ${recipeID}`);
+
+    const userIngQuery = {
+      text: `SELECT i.ingredient_name FROM recipe_ing r inner join user_stock u on r.ing_id = u.ingredient_id inner join ingredients i on r.ing_id = i.id inner join recipes rc on rc.recipe_id = r.recipe_id WHERE rc.recipe_name = '${drink}' and u.user_id = ${userID}`
+    };
+    
+    const userIngResult = await User.query(userIngQuery);
+    res.locals.userIng = userIngResult.rows;
+
+//     SELECT r.recipe_id, rc.recipe_name, r.ing_id, i.ingredient_name
+// FROM recipe_ing r inner join user_stock u on r.ing_id = u.ingredient_id inner join ingredients i on r.ing_id = i.id inner join recipes rc on rc.recipe_id = r.recipe_id
+// WHERE rc.recipe_name = ‘Margarita’ and u.user_id = 1
+    
+    // res.locals.userIng = 
+  } catch (err) {
+    console.log(err);
+    return next({
+      log: 'An error occured in the DRINKS CONTROLLER - get ingredients query',
+    });
+  }
+};
+
     // query the database for the ingredients_in_drinks table with columns added for "ingredient" name, "in_stock" amount and for "drink" name
   // User.query(queryStr)
   // .then((data) => {

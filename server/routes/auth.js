@@ -8,40 +8,22 @@ const sessionController = require('../controllers/sessionController');
 const cookieController = require('../controllers/cookieController');
 
 // Sign Up - user can post username and password on the login page and hit create and send a post request to our server. 
-
-// sessionController.startSession - put back in if we need this
 router.post('/signup', userController.createUser,
-  cookieController.setSSIDCookie,
- (req, res) => {
-    // WHAT DO WE WANT TO DO HERE?
-  }
-);
+  cookieController.setSSIDCookie, (req, res, next) => {res.status(200).json(res.locals.userID)
+})
+
+
 
 // Login
 // sessionController.startSession - put back in if we need this
+// we send them back a boolean on the res.locals.verified property and a number on the res.locals.userID property
 router.post('/login',
   userController.verifyUser,
   cookieController.setSSIDCookie,
   (req, res) => {
-    res.status(200).json(res.locals.response)
+    res.status(200).json(res.locals);
   }
 );
 
-router.post('/login/create', (req, res, next) => {
-
-  bcrypt.hash(req.body.password, saltRounds, (error, hash) => {
-  
-    User.create({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      username: req.body.username,
-      password: hash
-    })
-    .then(user => res.status(201).send(user))
-    .catch(error => next(error))
-    
-  })
-  
-})
 
 module.exports = router

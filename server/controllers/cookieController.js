@@ -10,15 +10,18 @@ cookieController.setSSIDCookie = async (req, res, next) => {
     const dbUserID = await User.query(
       `SELECT user_id FROM users WHERE username = '${username}'`
     );
+    // give the userID back to the front end
     res.locals.userID = dbUserID.rows[0].user_id;
-    console.log("messy object", dbUserID.rows[0].user_id);
-    console.log('ssid', dbUserID.rows[0].user_id) //ssid1
+ 
     // set the cookie on the response object
     res.cookie("ssid", dbUserID.rows[0].user_id, { httpOnly: true });
 
+//  add to our database thru a database query
     await User.query(
-      `INSERT INTO sessions(cookie_id, user_id, created_at) VALUES('ssid' + ${dbUserID.rows[0].user_id}', ${dbUserID.rows[0].user_id}, now()`);
+      `INSERT INTO sessions(cookie_id, user_id, created_at) VALUES( ${dbUserID.rows[0].user_id}, ${dbUserID.rows[0].user_id}, now())`);
     next();
+
+    // if everything fails, then a catch block
   } catch (err) {
     console.log(err);
     return next({
@@ -26,7 +29,7 @@ cookieController.setSSIDCookie = async (req, res, next) => {
     });
   }
 }
-// then add to our database thru a database query
+
 //   catch (err) {
 //     console.log(err);
 //     return next({
