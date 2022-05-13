@@ -13,7 +13,7 @@ import UserBarCardDeck from "../components/UserBarCardDeck.jsx";
  */
 export default function UserBarContainer() {
   // Create state
-  const [userBar, setUserBar] = useState();
+  const [userBar, setUserBar] = useState([]);
   // useEffect
   useEffect(() => {
     // const getUserBarData = async () => {

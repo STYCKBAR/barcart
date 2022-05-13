@@ -20,6 +20,8 @@ import LocalBarIcon from '@mui/icons-material/LocalBar';
 import IngredientList from './IngredientList.jsx';
 
 
+
+
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -45,24 +47,19 @@ export default function CocktailCard(props) {
   return (
     <Card sx={{ maxWidth: 500, m: 2 }} >
       <CardHeader
-        // avatar={
-        // <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-        //   R
-        // </Avatar>
-        // }
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
           </IconButton>
         }
-
+        id="card_title"
         title={props.cocktail.recipe_name}
       />
       <CardContent id="cardContainer">
 
         <CardMedia
           component="img"
-          height="194"
+          height="400"
           image={margarita}
           alt="A margarita"
         />
@@ -105,9 +102,9 @@ export default function CocktailCard(props) {
             <IngredientList cocktail={props.cocktail} userid={props.userid} />
           </Typography>
 
-
-          <Typography paragraph>Directions:</Typography>
-          <Typography paragraph>
+          &nbsp;
+          <Typography paragraph variant="subtitle2" align="left" >Directions:</Typography>
+          <Typography paragraph variant="body2" color="text.secondary" >
             {props.cocktail.directions}
           </Typography>
         </CardContent>

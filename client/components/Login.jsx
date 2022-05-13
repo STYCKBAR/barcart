@@ -81,11 +81,11 @@ export default function SignIn() {
     //     //data here is the response
     //     //set state of verified
     //     setVerified(data.verified);
-    //     setUserId(data.userid);
+    //     localStorage.setItem('userid', data.userid)
     //   })
     //   .catch((err) => console.log("Loginpage: ERROR: ", err));
     setVerified(true);
-    setUserId("fake456");
+    localStorage.setItem('userid', 'fake456')
 
   };
   //this is handle click when we click 'Don't have an account? Sign Up'
@@ -111,7 +111,8 @@ export default function SignIn() {
   }, [verified]);
 
   const goToMainpage = () =>
-    navigate("/cocktails", { state: { userid: userid } });
+    // navigate("/cocktails", { state: { userid: userid } });
+    navigate("/cocktails");
 
   const goToSignUpPage = () => {
     navigate("/signup");
