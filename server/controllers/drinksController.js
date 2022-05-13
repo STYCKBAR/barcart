@@ -2,18 +2,19 @@
 const User = require('../models/userModel');
 
 const drinksController = {};
+//fixed!!
+drinksController.getDrinks = (req, res, next) => {
+  const drinksQuery = `SELECT * FROM recipes`;
 
-drinksController.getDrinks = async (req, res, next) => {
-  try {
-    const dbRecipes = await User.query(`SELECT * FROM recipes`);
-    console.log(dbRecipes.rows); // req.query
-    res.locals.recipes = dbRecipes.rows;
-  } catch (err) {
-    console.log(err);
-    return next({
+  User.query(drinksQuery)
+    .then((data) => {
+      res.locals.recipes = data.rows;
+      return next();
+    })
+    .catch(error => next({
       log: 'An error occured in the DRINKS CONTROLLER - get all recipes query',
-    });
-  }
+      message: { err: 'An error occured in the DRINKS CONTROLLER - get all recipes query' }
+    }));
 };
 
 
@@ -66,7 +67,7 @@ drinksController.getIng = async (req, res, next) => {
 //       // calculate how many drinks the user can make given their inventory of the current ingredient
 //       let numDrinks = Math.floor(el.in_stock / el.quantity);
 //       let drinkName = el.drink;
-      
+
 //       // if drink already exists, update numDrinks only if current ingredient it is the "limiting factor"
 //       if (possible.hasOwnProperty(drinkName)) { 
 //         if (numDrinks < possible[drinkName]) {

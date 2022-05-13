@@ -5,6 +5,7 @@ import styles from "../scss/userbarcard.scss";
  * Displays personal user bar inventory information.
  */
 export default function UserBarCard(props) {
+  //props.id, props.name
   return (
     <div className="user-bar-card">
       <div className="user-bar-design-block">
@@ -12,10 +13,10 @@ export default function UserBarCard(props) {
       </div>
       <div>
         <p className="user-bar-text user-bar-type">
-          <b>Type:</b> {props.family}
+          <b>ID:</b> {props.id}
         </p>
         <p className="user-bar-text user-bar-stock">
-          <b>Current Stock:</b> {props.currentStock} <span>{props.unit}</span>
+          <b>Ingredient Name:</b> {props.name}
         </p>
       </div>
     </div>
